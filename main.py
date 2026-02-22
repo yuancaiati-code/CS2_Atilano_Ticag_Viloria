@@ -31,6 +31,7 @@ try:
     print("2. 67")
     print("3. mustard")
     print("4. Tutorial")
+    print("5. save")
     print()
     option = int(input("What would you want to do today? : "))
 
@@ -47,7 +48,9 @@ try:
         print("Just mess around")
         print("Idk what this program does")
 
-
+    elif option == 5:
+        with open(filename, 'w') as file:
+            json.dump(data, file, indent=4)
 
 
 
