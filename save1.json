@@ -1,0 +1,67 @@
+[
+    {
+        "id": 101,
+        "name": "Finn the Human",
+        "age": 13,
+        "math": 85,
+        "science": 90,
+        "english": 88,
+        "filipino": 92,
+        "study_hours_per_week": 10,
+        "sleep_hours_per_night": 8,
+        "exercise_minutes_per_day": 30,
+        "average": 88.75
+    },
+    {
+        "id": 102,
+        "name": "Marceline the Vampire Queen",
+        "age": 14,
+        "math": 78,
+        "science": 85,
+        "english": 80,
+        "filipino": 86,
+        "study_hours_per_week": 8,
+        "sleep_hours_per_night": 7,
+        "exercise_minutes_per_day": 20,
+        "average": 82.25
+    },
+    {
+        "id": 103,
+        "name": "Princess Bubblegum",
+        "age": 13,
+        "math": 92,
+        "science": 95,
+        "english": 91,
+        "filipino": 89,
+        "study_hours_per_week": 12,
+        "sleep_hours_per_night": 8,
+        "exercise_minutes_per_day": 40,
+        "average": 91.75
+    },
+    {
+        "id": 104,
+        "name": "Jake the Dog",
+        "age": 14,
+        "math": 70,
+        "science": 75,
+        "english": 72,
+        "filipino": 78,
+        "study_hours_per_week": 6,
+        "sleep_hours_per_night": 6,
+        "exercise_minutes_per_day": 15,
+        "average": 73.75
+    },
+    {
+        "id": 105,
+        "name": "Ice King",
+        "age": 13,
+        "math": 88,
+        "science": 82,
+        "english": 85,
+        "filipino": 90,
+        "study_hours_per_week": 9,
+        "sleep_hours_per_night": 7,
+        "exercise_minutes_per_day": 25,
+        "average": 86.25
+    }
+]
