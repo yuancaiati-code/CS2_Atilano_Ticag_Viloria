@@ -47,6 +47,7 @@ try:
     elif option == 4:
         print("Just mess around")
         print("Idk what this program does")
+        print("joe")
 
     elif option == 5:
         with open(filename, 'w') as file:
