@@ -1,0 +1,62 @@
+[
+  {
+    "time": "8:00AM - 8:50AM",
+    "period": "Chemistry",
+    "teacher": "Sir Juanito Reyes III"
+  },
+  {
+    "time": "8:50AM - 9:40AM",
+    "period": "SocSci",
+    "teacher": "Ma'am Krystel Galong"
+  },
+  {
+    "time": "9:40AM - 10:00AM",
+    "period": "Break",
+    "teacher": "None"
+  },
+  {
+    "time": "10:00AM - 10:50AM",
+    "period": "ES",
+    "teacher": "Sir Ricardo Saturay"
+  },
+  {
+    "time": "10:50AM - 11:40AM",
+    "period": "Lab",
+    "teacher": ""
+  },
+  {
+    "time": "11:40AM - 12:30PM",
+    "period": "Lab",
+    "teacher": ""
+  },
+  {
+    "time": "12:30PM - 1:20PM",
+    "period": "Lunch",
+    "teacher": "None"
+  },
+  {
+    "time": "1:20PM - 2:10PM",
+    "period": "Music",
+    "teacher": "Ma'am Fabella Tabadero"
+  },
+  {
+    "time": "2:10PM - 3:00PM",
+    "period": "Geometry",
+    "teacher": "Ma'am Maria Bastian"
+  },
+  {
+    "time": "3:00PM - 3:20PM",
+    "period": "Break",
+    "teacher": "None"
+  },
+  {
+    "time": "3:20PM - 4:10",
+    "period": "Biology",
+    "teacher": "Ma'am Frances Aniceto"
+  },
+  {
+    "time": "4:10PM - 5:00PM",
+    "period": "English",
+    "teacher": "Ma'am Joana Chaguile"
+  }
+]

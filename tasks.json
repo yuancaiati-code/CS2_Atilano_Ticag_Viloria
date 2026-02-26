@@ -1,0 +1,47 @@
+[
+   {
+      "task": "Project",
+      "subject": "Algebra",
+      "due_date_and_time": "2026-02-22, 19:00",
+      "priority": "Medium",
+      "progress": "In progress",
+      "goal": "5 days before due date",
+      "goal_reached": "--"
+   },
+   {
+      "task": "GitHub Updates",
+      "subject": "CS",
+      "due_date_and_time": "2026-03-06, 23:59",
+      "priority": "Low",
+      "progress": "In progress",
+      "goal": "5 days before due date",
+      "goal_reached": "--"
+   },
+   {
+      "task": "Vlog/Podcast",
+      "subject": "Filipino",
+      "due_date_and_time": "2026-02-24, 23:59",
+      "priority": "Done",
+      "progress": "Submitted",
+      "goal": "1 day before due date",
+      "goal_reached": "N"
+   },
+   {
+      "task": "Sound Waves/EMS Video",
+      "subject": "Physics",
+      "due_date_and_time": "2026-03-06, 19:00",
+      "priority": "Low",
+      "progress": "In progress",
+      "goal": "3 days before due date",
+      "goal_reached": "--"
+   },
+   {
+      "task": "Notebook",
+      "subject": "Physics",
+      "due_date_and_time": "2026-03-06, 19:00",
+      "priority": "Low",
+      "progress": "Submitted",
+      "goal": "A week before due date",
+      "goal_reached": "Y"
+   }
+]
