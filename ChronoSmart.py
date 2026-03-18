@@ -1,27 +1,28 @@
 #Import json for files, and import datetime to get dates in actual life.
 import json
+import time
 from datetime import datetime
 try:
     #Open all files needed.
-    with open('mon_schedule.json', 'r') as file:
+    with open('monday.json', 'r') as file:
         mon = json.load(file)
-    with open('mon_schedule.json', 'w') as file:
+    with open('monday.json', 'w') as file:
         json.dump(mon, file, indent=3)
-    with open('tue_schedule.json', 'r') as file:
+    with open('tuesday.json', 'r') as file:
         tue = json.load(file)
-    with open('tue_schedule.json', 'w') as file:
+    with open('tuesday.json', 'w') as file:
         json.dump(tue, file, indent=3)
-    with open('wed_schedule.json', 'r') as file:
+    with open('wednesday.json', 'r') as file:
         wed = json.load(file)
-    with open('wed_schedule.json', 'w') as file:
+    with open('wednesday.json', 'w') as file:
         json.dump(wed, file, indent=3)
-    with open('thu_schedule.json', 'r') as file:
+    with open('thursday.json', 'r') as file:
         thu = json.load(file)
-    with open('thu_schedule.json', 'w') as file:
+    with open('thursday.json', 'w') as file:
         json.dump(thu, file, indent=3)
-    with open('fri_schedule.json', 'r') as file:
+    with open('friday.json', 'r') as file:
         fri = json.load(file)
-    with open('fri_schedule.json', 'w') as file:
+    with open('friday.json', 'w') as file:
         json.dump(fri, file, indent=3)
     filename = "tasks.json"
     with open(filename, 'r') as file:
@@ -139,10 +140,7 @@ try:
                         break
 
     #4.
-    def update_tasks():
-        for i in data:
-            if i["progress"] == "Submitted":
-                del data[data.index(i)]
+
 
     #This is for the user interface, which decides what is needed to access based on the user's decision.
     def menu():
@@ -159,7 +157,7 @@ try:
                 update_classes()
 
             elif ans == 4:
-                update_tasks()
+                pass
 
             elif ans == 0:
                 response = input("Are you sure you want to exit? (Y/N)")

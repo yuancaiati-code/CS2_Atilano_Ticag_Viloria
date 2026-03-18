@@ -31,9 +31,9 @@
       "subject": "Physics",
       "due_date_and_time": "2026-03-06, 19:00",
       "priority": "Low",
-      "progress": "In progress",
+      "progress": "Submitted",
       "goal": "3 days before due date",
-      "goal_reached": "--"
+      "goal_reached": "Y"
    },
    {
       "task": "Notebook",
