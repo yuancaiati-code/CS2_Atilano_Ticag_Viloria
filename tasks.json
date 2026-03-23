@@ -3,18 +3,18 @@
       "task": "Project",
       "subject": "Algebra",
       "due_date_and_time": "2026-02-22, 19:00",
-      "priority": "Medium",
-      "progress": "In progress",
-      "goal": "5 days before due date",
-      "goal_reached": null
+      "priority": "Done",
+      "progress": "Submitted",
+      "goal": 5,
+      "goal_reached": false
    },
    {
       "task": "GitHub Updates",
       "subject": "CS",
       "due_date_and_time": "2026-03-06, 23:59",
-      "priority": "Low",
+      "priority": "Done",
       "progress": "In progress",
-      "goal": "5 days before due date",
+      "goal": 5,
       "goal_reached": null
    },
    {
@@ -23,14 +23,14 @@
       "due_date_and_time": "2026-02-24, 23:59",
       "priority": "Done",
       "progress": "Submitted",
-      "goal": "1 day before due date",
+      "goal": 1,
       "goal_reached": false
    },
    {
       "task": "Sound Waves/EMS Video",
       "subject": "Physics",
       "due_date_and_time": "2026-03-06, 19:00",
-      "priority": "Low",
+      "priority": "Done",
       "progress": "Submitted",
       "goal": "3 days before due date",
       "goal_reached": true
@@ -39,7 +39,7 @@
       "task": "Notebook",
       "subject": "Physics",
       "due_date_and_time": "2026-03-06, 19:00",
-      "priority": "Low",
+      "priority": "Done",
       "progress": "Submitted",
       "goal": "A week before due date",
       "goal_reached": true
