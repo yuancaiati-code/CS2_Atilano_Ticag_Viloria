@@ -4,25 +4,25 @@ import time
 from datetime import datetime
 try:
     #Open all files needed.
-    with open('monday.json', 'r') as file:
+    with open('m.json', 'r') as file:
         mon = json.load(file)
-    with open('monday.json', 'w') as file:
+    with open('m.json', 'w') as file:
         json.dump(mon, file, indent=3)
-    with open('tuesday.json', 'r') as file:
+    with open('t.json', 'r') as file:
         tue = json.load(file)
-    with open('tuesday.json', 'w') as file:
+    with open('t.json', 'w') as file:
         json.dump(tue, file, indent=3)
-    with open('wednesday.json', 'r') as file:
+    with open('w.json', 'r') as file:
         wed = json.load(file)
-    with open('wednesday.json', 'w') as file:
+    with open('w.json', 'w') as file:
         json.dump(wed, file, indent=3)
-    with open('thursday.json', 'r') as file:
+    with open('th.json', 'r') as file:
         thu = json.load(file)
-    with open('thursday.json', 'w') as file:
+    with open('th.json', 'w') as file:
         json.dump(thu, file, indent=3)
-    with open('friday.json', 'r') as file:
+    with open('f.json', 'r') as file:
         fri = json.load(file)
-    with open('friday.json', 'w') as file:
+    with open('f.json', 'w') as file:
         json.dump(fri, file, indent=3)
     filename = "tasks.json"
     with open(filename, 'r') as file:
@@ -210,5 +210,5 @@ try:
     menu()
 except FileNotFoundError:
     print("Error: The file 'data.json' was not found")
-except  json.JSONDecodeError as e:
+except json.JSONDecodeError as e:
     print("Failed to decode JSON: {e}")
