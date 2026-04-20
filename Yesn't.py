@@ -119,23 +119,21 @@ try:
         json.dump(reqs, file, indent=3)
     def notify():
         tasks = []
+        notif = []
         print("Tasks and due date:")
         for task in reqs:
             due = task["due_date_and_time"]
             due_date = datetime.strptime(due, "%Y-%m-%d %H:%M")
             time_now = datetime.now()
             time_left = due_date - time_now
+            notif.append(time_left)
+
+        for task in tasks:
             tasks.append(task["task"], task["subject"])
-             
             if datetime.timedelta(days=0) < time_left <= datetime.timedelta(days=1):
-                print("Task")
-
-
-
-
-
-
-
+                print("Tasks due in 1 day:")
+                for req, subject, in tasks:
+                    print(f"{task.upper()} - {subject.upper()}")
 
     print("Welcome to ChronoSmart!")
     time.sleep(1)
@@ -146,6 +144,7 @@ try:
     print("Take a look around, this is our menu:")
     time.sleep(2)
     menu()
+    notify()
 except FileNotFoundError:
     print("Error: The file 'data.json' was not found")
 except json.JSONDecodeError as e:
