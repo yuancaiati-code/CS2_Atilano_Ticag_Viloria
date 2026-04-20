@@ -14,7 +14,7 @@
       "due_date_and_time": "2026-03-06, 23:59",
       "priority": "Done",
       "progress": "In progress",
-      "goal": 5,
+      "goal": "2026-03-03, 23:59",
       "goal_reached": null
    },
    {
@@ -23,7 +23,7 @@
       "due_date_and_time": "2026-02-24, 23:59",
       "priority": "Done",
       "progress": "Submitted",
-      "goal": 1,
+      "goal": "2026-02-23, 23:59",
       "goal_reached": false
    },
    {
@@ -32,7 +32,7 @@
       "due_date_and_time": "2026-03-06, 19:00",
       "priority": "Done",
       "progress": "Submitted",
-      "goal": "3 days before due date",
+      "goal": "2026-03-05, 19:00",
       "goal_reached": true
    },
    {
@@ -41,7 +41,7 @@
       "due_date_and_time": "2026-03-06, 19:00",
       "priority": "Done",
       "progress": "Submitted",
-      "goal": "A week before due date",
+      "goal": "2026-02-27, 19:00",
       "goal_reached": true
    }
 ]

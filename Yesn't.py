@@ -20,10 +20,6 @@ try:
 
     #2. This uses a similar structure for checking schedules, except it checks all tasks, regardless of what day.
     def check_tasks():
-        with open('tasks.json', 'r') as file:
-            reqs = json.load(file)
-        with open('tasks.json', 'w') as file:
-            json.dump(reqs, file, indent=3)
         print("Task ------> Subject ------> Due Date & Time ------> Priority ------> Progress ------> Goal ------> Is goal reached? ")
         tasks_to_do = []
         for task in reqs:
@@ -40,12 +36,6 @@ try:
                         classes[update] = change
 
 
-
-    #4.
-    #    def update_tasks():
-    #    for task in tasks:
-    #        if task["progress"] == "Submitted":
-    #            del task[tasks.index(tasks)]
     def update_tasks():
        pass
 
@@ -89,9 +79,10 @@ try:
                     with open(f'{choice}.json', 'w') as file:
                         json.dump(schedule, file, indent=3)
 
-                    if ans == 2:
+
+                    if ans == 3:
                         show_sched(choice, schedule)
-                    elif ans == 3:
+                    elif ans == 4:
                         cls= input("What class will be updated(time)?")
                         upd = input("What do you wanna change (period, or teacher)?")
                         cng = input("What will you change it to?")
@@ -121,8 +112,30 @@ try:
             else:
                 print("Invalid input.")
 
-    #def notify():
-        #if datetime.now == 5
+
+    with open('tasks.json', 'r') as file:
+        reqs = json.load(file)
+    with open('tasks.json', 'w') as file:
+        json.dump(reqs, file, indent=3)
+    def notify():
+        tasks = []
+        print("Tasks and due date:")
+        for task in reqs:
+            due = task["due_date_and_time"]
+            due_date = datetime.strptime(due, "%Y-%m-%d %H:%M")
+            time_now = datetime.now()
+            time_left = due_date - time_now
+            tasks.append(task["task"], task["subject"])
+             
+            if datetime.timedelta(days=0) < time_left <= datetime.timedelta(days=1):
+                print("Task")
+
+
+
+
+
+
+
 
     print("Welcome to ChronoSmart!")
     time.sleep(1)
