@@ -118,22 +118,35 @@ try:
     with open('tasks.json', 'w') as file:
         json.dump(reqs, file, indent=3)
     def notify():
-        tasks = []
-        notif = []
-        print("Tasks and due date:")
+        time = []
         for task in reqs:
             due = task["due_date_and_time"]
             due_date = datetime.strptime(due, "%Y-%m-%d, %H:%M")
             time_now = datetime.now()
             time_left = due_date - time_now
-            notif.append(time_left)
+            time.append(time_left, task["task"], task["subject"])
 
-        print("Tasks due in 1 day:")
-        for task in tasks:
-            tasks.append(task["task"], task["subject"])
+        one_day_left = []
+        one_week_left = []
+        one_hour_left = []
+        for tim in time:
             if datetime.timedelta(days=0) < time_left <= datetime.timedelta(days=1):
-                for req, subject, in tasks:
-                    print(f"{task.upper()} - {subject.upper()}")
+                one_day_left.append(tim)
+            elif datetime.timedelta(days=5) < time_left <= datetime.timedelta(days=7):
+                one_week_left.append(tim)
+            elif datetime.timedelta(minutes=59) < time_left <= datetime.timedelta(minutes=60):
+                one_hour_left.append(tim)
+
+        print("Tasks due in one day:")
+        for sub in one_day_left:
+            print(sub)
+
+        print("Tasks due in one week:")
+        for sub in one_week_left:
+            print(sub)
+
+
+
 
     print("Welcome to ChronoSmart!")
     time.sleep(1)
