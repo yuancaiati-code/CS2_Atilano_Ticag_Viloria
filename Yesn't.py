@@ -1,13 +1,13 @@
 #Import json for files, and import datetime to get dates in actual life.
 import json
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 
 try:
     #Open all files needed.
 
     #1. Define function to print individual schedules according to user's preference on which schedule is needed.
-    def show_sched(classes, chose):
+    def show_sched(chose):
         while True:
             print("Schedule:")
             print("Time -------> Period --------> Teacher")
@@ -16,7 +16,6 @@ try:
                 day_schedule.append((classes["time"], classes["period"], classes["teacher"]))
             for clas, period, teacher in day_schedule:
                     print(f"{clas} : {period} : {teacher}")
-
 
     #2. This uses a similar structure for checking schedules, except it checks all tasks, regardless of what day.
     def check_tasks():
@@ -28,7 +27,7 @@ try:
             print(f"{to_do}   :   {subject}   :   {due_date_and_time}   :   {priority}   :   {progress}   :   {goal}   :   {goal_reached}")
 
     #3. This is for updating the schedules, by either deleting or changing a schedule.
-    def update_classes(chose, classes, class_update, update, change):
+    def update_classes(chose, class_update, update, change):
         while True:
             if chose in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "monday"]:
                 for classes in chose:
@@ -112,7 +111,6 @@ try:
             else:
                 print("Invalid input.")
 
-
     with open('tasks.json', 'r') as file:
         reqs = json.load(file)
     with open('tasks.json', 'w') as file:
@@ -124,32 +122,44 @@ try:
             due_date = datetime.strptime(due, "%Y-%m-%d, %H:%M")
             time_now = datetime.now()
             time_left = due_date - time_now
-            time.append(time_left, task["task"], task["subject"])
+            time.append(time_left)
+
 
         one_day_left = []
         one_week_left = []
         one_hour_left = []
         for tim in time:
-            if datetime.timedelta(days=0) < time_left <= datetime.timedelta(days=1):
+            if timedelta(days=0) < time_left <= timedelta(days=1):
                 one_day_left.append(tim)
-            elif datetime.timedelta(days=5) < time_left <= datetime.timedelta(days=7):
+            elif timedelta(days=5) < time_left <= timedelta(days=7):
                 one_week_left.append(tim)
-            elif datetime.timedelta(minutes=59) < time_left <= datetime.timedelta(minutes=60):
+            elif timedelta(minutes=59) < time_left <= timedelta(minutes=60):
                 one_hour_left.append(tim)
 
+
         print("Tasks due in one day:")
-        for sub in one_day_left:
-            print(f"{sub}\n")
+        if not list():
+            print("None")
+
+        else:
+            for sub in one_day_left:
+                print(f"{sub}\n")
 
         print("Tasks due in one week:")
-        for sub in one_week_left:
-            print(f"{sub}\n")
+        if not list():
+            print("None")
+
+        else:
+            for sub in one_week_left:
+                print(f"{sub}\n")
 
         print("Tasks due in one hour:")
-        for sub in one_hour_left:
-            print(f"{sub}\n")
+        if not list():
+            print("None")
 
-
+        else:
+            for sub in one_hour_left:
+                print(f"{sub}\n")
 
 
     print("Welcome to ChronoSmart!")
