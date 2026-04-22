@@ -139,11 +139,15 @@ try:
 
         print("Tasks due in one day:")
         for sub in one_day_left:
-            print(sub)
+            print(f"{sub}\n")
 
         print("Tasks due in one week:")
         for sub in one_week_left:
-            print(sub)
+            print(f"{sub}\n")
+
+        print("Tasks due in one hour:")
+        for sub in one_hour_left:
+            print(f"{sub}\n")
 
 
 
