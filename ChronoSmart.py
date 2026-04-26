@@ -9,13 +9,20 @@ import time
 from datetime import datetime, timedelta
 
 try:
+    def get_sched(day):
+        with open(f'{day}.json','r') as f1:
+            return json.load(f1)
+
+    def save_sched(day, data):
+        with open(f'{day}.json','w') as f1:
+            json.dump(data,f1,indent=3)
 
     def show_sched(chose):
-        while True:
+            schedule = get_sched(chose)
             print("Schedule:")
             print("Time -------> Period --------> Teacher")
             day_schedule = []
-            for classes in chose:
+            for classes in schedule:
                 day_schedule.append((classes["time"], classes["period"], classes["teacher"]))
             for clas, period, teacher in day_schedule:
                     print(f"{clas} : {period} : {teacher}")
@@ -30,10 +37,12 @@ try:
 
     def update_classes(chose, class_update, update, change):
         while True:
+            schedule = get_sched(chose)
             if chose in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "monday"]:
                 for classes in chose:
                     if class_update == classes["time"]:
                         classes[update] = change
+            save_sched(chose, schedule)
 
 
     def update_tasks():
@@ -66,6 +75,7 @@ try:
             print(r"                                         \__________\/ \__________\/ \_____\\_\/ \_\/     \____\/ ")
             time.sleep(2)
 
+
             ans = int(input("Menu: \n 1. Check Tasks\n 2. Check Schedule\n 3. Update Class\n 4. Update Tasks\n 0. Exit\nWhat do you want to do? (1,2,3,4, 0): "))
             if ans == 1:
                 check_tasks()
@@ -74,19 +84,15 @@ try:
                 choice = str(input("What day do you want?\n 1. Monday\n 2. Tuesday\n 3. Wednesday\n 4. Thursday\n 5. Friday\n 6. Back to menu\nEnter (M, T, W, Th, F): "))
                 if choice in["m", "t", "w", "th", "f", "M", "T", "W", "Th", "TH", "F"]:
                     choice = choice.lower()
-                    with open(f'{choice}.json', 'r') as file:
-                        schedule = json.load(file)
-                    with open(f'{choice}.json', 'w') as file:
-                        json.dump(schedule, file, indent=3)
 
+                    if ans == 2:
+                        show_sched(choice)
 
-                    if ans == 3:
-                        show_sched(choice, schedule)
-                    elif ans == 4:
+                    elif ans == 3:
                         cls= input("What class will be updated(time)?")
                         upd = input("What do you wanna change (period, or teacher)?")
                         cng = input("What will you change it to?")
-                        update_classes(schedule, schedule, cls,  upd, cng)
+                        update_classes(choice, cls,  upd, cng)
 
                 elif choice in ["Menu", "menu"]:
                     response = input("Would you like to proceed to menu (Y/N)? ")
@@ -112,50 +118,49 @@ try:
             else:
                 print("Invalid input.")
 
-    with open('tasks.json', 'r') as file:
-        reqs = json.load(file)
-    with open('tasks.json', 'w') as file:
-        json.dump(reqs, file, indent=3)
+    with open('tasks.json', 'r') as f:
+        reqs = json.load(f)
+    with open('tasks.json', 'w') as f:
+        json.dump(reqs, f, indent=3)
+
     def notify():
-        time = []
+        time_list = []
         for task in reqs:
             due = task["due_date_and_time"]
             due_date = datetime.strptime(due, "%Y-%m-%d, %H:%M")
             time_now = datetime.now()
             time_left = due_date - time_now
-            time.append(time_left)
+            time_list.append(time_left)
 
 
         one_day_left = []
         one_week_left = []
         one_hour_left = []
-        for tim in time:
+        for time_left in time_list:
             if timedelta(days=0) < time_left <= timedelta(days=1):
-                one_day_left.append(tim)
+                one_day_left.append(time_left)
             elif timedelta(days=5) < time_left <= timedelta(days=7):
-                one_week_left.append(tim)
+                one_week_left.append(time_left)
             elif timedelta(minutes=59) < time_left <= timedelta(minutes=60):
-                one_hour_left.append(tim)
-
-
-        print("Tasks due in one day:")
-        if not list():
-            print("None")
-
-        else:
-            for sub in one_day_left:
-                print(f"{sub}\n")
+                one_hour_left.append(time_left)
 
         print("Tasks due in one week:")
-        if not list():
+        if not one_week_left:
             print("None")
 
         else:
             for sub in one_week_left:
                 print(f"{sub}\n")
 
+        print("Tasks due in one day:")
+        if not one_day_left:
+            print("None")
+        else:
+            for sub in one_day_left:
+                print(f"{sub}\n")
+
         print("Tasks due in one hour:")
-        if not list():
+        if not one_hour_left:
             print("None")
 
         else:
