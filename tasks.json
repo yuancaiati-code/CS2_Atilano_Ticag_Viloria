@@ -1,11 +1,11 @@
 [
    {
       "task": "Project",
-      "subject": "Algebra",
-      "due_date_and_time": "2026-02-22, 19:00",
-      "priority": "Done",
+      "subject": "CS",
+      "due_date_and_time": "2026-04-27, 17:00",
+      "priority": "In progress",
       "progress": "Submitted",
-      "goal": 5,
+      "goal": "2026-04-27, 17:00",
       "goal_reached": false
    },
    {

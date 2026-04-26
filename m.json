@@ -1,11 +1,11 @@
 [
    {
-      "time": "8:00AM - 8:50AM",
+      "time": "8:00 - 8:50",
       "period": "Flag Ceremony",
       "teacher": "N/A"
    },
    {
-      "time": "8:50AM - 9:40AM",
+      "time": "8:50 - 9:40",
       "period": "CS",
       "teacher": "Ma'am Kaye Alamag"
    },
@@ -41,7 +41,7 @@
    },
    {
       "time": "2:10PM - 3:00PM",
-      "period": "Algebra",
+      "period": "Math 2",
       "teacher": "Sir Joseph Tabadero"
    },
    {
