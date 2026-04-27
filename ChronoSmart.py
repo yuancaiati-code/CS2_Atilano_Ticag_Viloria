@@ -1,27 +1,45 @@
 #Tasks needed to be done by group: Fix errors and make sure they are up to date:
     #1. While loops
     #2. Outputs
-    #3. Function flow
-    #4. Finish update task function
+    #3. Finish update task function
+
+#This imports all needed modules for code.
 import json
 import time
 from datetime import datetime, timedelta
 
 try:
+    #This function is for opening the schedule files, without having to open it again.
     def get_sched(day):
         with open(f'{day}.json','r') as f1:
             return json.load(f1)
 
+    #This function is for saving all updates for schedule files.
     def save_sched(day, data):
         with open(f'{day}.json','w') as f1:
             json.dump(data,f1,indent=3)
 
+    #This function is for validating yes and no inputs.
     def validate(res):
         print("Not a valid input")
         if res in ["Y", "y", "N", "n"]:
             if res.upper() == "N":
                 pass
 
+    # 1. This outputs all the tasks with their subjects and due dates.
+    def check_tasks():
+        print(
+            "Task ------> Subject ------> Due Date & Time ------> Priority ------> Progress ------> Goal ------> Is goal reached? ")
+        tasks_to_do = []
+        for task in reqs:
+            tasks_to_do.append((task["task"], task["subject"], task["due_date_and_time"], task["priority"],
+                                task["progress"], task["goal"], task["goal_reached"]))
+        for to_do, subject, due_date_and_time, priority, progress, goal, goal_reached in tasks_to_do:
+            print(
+                f"{to_do}   :   {subject}   :   {due_date_and_time}   :   {priority}   :   {progress}   :   {goal}   :   {goal_reached}")
+
+
+    # 2. This function is for viewing the schedule.
     def show_sched(chose):
             schedule = get_sched(chose)
             print("Schedule:")
@@ -32,19 +50,13 @@ try:
             for clas, period, teacher in day_schedule:
                     print(f"{clas} : {period} : {teacher}")
 
-    def check_tasks():
-        print("Task ------> Subject ------> Due Date & Time ------> Priority ------> Progress ------> Goal ------> Is goal reached? ")
-        tasks_to_do = []
-        for task in reqs:
-            tasks_to_do.append((task["task"], task["subject"], task["due_date_and_time"], task["priority"], task["progress"], task["goal"], task["goal_reached"]))
-        for to_do, subject, due_date_and_time, priority, progress, goal, goal_reached in tasks_to_do:
-            print(f"{to_do}   :   {subject}   :   {due_date_and_time}   :   {priority}   :   {progress}   :   {goal}   :   {goal_reached}")
-
+    # 3. This function makes sure tasks are up to date.
     def update_tasks(year, month, day, hour, minute):
         for task in reqs:
                 date = f"{year}-{month}-{day}, {hour}:{minute}"
                 task["due_date_and_time"] = date
 
+    # 4. This updates classes wanted to change, based on the subject period.
     def update_classes(chose, clas, update):
         schedule = get_sched(chose)
         if update == "p":
@@ -76,72 +88,7 @@ try:
                     print("Invalid input")
 
         save_sched(chose, schedule)
-
-    #This is for the user interface, which decides what is needed to access based on the user's decision.
-    def menu():
-        while True:
-            time.sleep(2)
-
-
-            ans = int(input("Menu: \n 1. Check Tasks\n 2. Check Schedule\n 3. Update Class\n 4. Update Tasks\n 0. Exit\nWhat do you want to do? (1,2,3,4, 0): "))
-            if ans == 1:
-                check_tasks()
-
-            elif ans == 2 or 3:
-                choice = str(input("What day do you want?\n 1. Monday\n 2. Tuesday\n 3. Wednesday\n 4. Thursday\n 5. Friday\n 6. Back to menu\nEnter (M, T, W, Th, F, Menu): "))
-                if choice in["m", "t", "w", "th", "f", "M", "T", "W", "Th", "TH", "F"]:
-                    choice = choice.lower()
-
-                    if ans == 2:
-                        show_sched(choice)
-
-                    elif ans == 3:
-                        cls = input("What class will be updated(period)?")
-                        upd = str(input("What do you wanna change (period, time, or teacher: p/t/teach)?"))
-                        if upd in ["P", "p", "T", "t", "teach", "Teach", "TEACH"]:
-                            upd = upd.lower()
-                        update_classes(choice, cls, upd)
-
-                elif choice in ["Menu", "menu"]:
-                    response = input("Would you like to proceed to menu (Y/N)? ")
-                    if response in ["Y", "y", "N", "n"]:
-                        if response.upper() == "N":
-                            break
-
-                else:
-                    print("Not a valid input")
-                    response = input("Would you like to continue (Y/N)? ")
-                    if response in list["Y", "y", "N", "n"]:
-                        if response.upper() == "N":
-                            break
-
-            elif ans == 4:
-                print("What subject is this?")
-                y = str(input("Enter year(yy)"))
-                m = str(input("Enter month(mm)"))
-                d = str(input("Enter day(dd)"))
-                h = str(input("Enter hour(HH)"))
-                mins = str(input("Enter minutes(MM)"))
-                update_tasks(y,m,d,h,mins)
-
-            elif ans == 0:
-                break
-
-            elif choice in ["Menu", "menu"]:
-                response = input("Would you like to proceed to menu (Y/N)? ")
-                validate(response)
-
-
-    with open('tasks.json', 'r') as f:
-        reqs = json.load(f)
-    with open('tasks.json', 'w') as f:
-        json.dump(reqs, f, indent=3)
-
-    with open('tasks.json', 'r') as f:
-        reqs = json.load(f)
-    with open('tasks.json', 'w') as f:
-        json.dump(reqs, f, indent=3)
-
+    #This makes sure that students are notified for subjects due in a week, day, and hour.
     def notify():
         time_list = []
         tasks_lst = []
@@ -186,13 +133,12 @@ try:
             for sub, task in one_day_left:
                 print(f"{task['task']} - {task['subject']}")
 
-
         print("Tasks due in one day:")
         if not one_day_left:
             print("None")
         else:
-            for sub in one_day_left:
-                print(f"{sub}\n")
+            for sub, task in one_day_left:
+                print(f"{task['task']} - {task['subject']}")
 
         print("Tasks due in one hour:")
         if not one_hour_left:
@@ -201,6 +147,69 @@ try:
         else:
             for sub, task in one_day_left:
                 print(f"{task['task']} - {task['subject']}")
+
+
+    #This is for the user interface, which decides what is needed to access based on the user's decision.
+    def menu():
+        yes = True
+        while yes:
+            time.sleep(2)
+
+            ans = int(input("Menu: \n 1. Check Tasks\n 2. Check Schedule\n 3. Update Class\n 4. Update Tasks\n 0. Exit\nWhat do you want to do? (1,2,3,4, 0): "))
+            if ans == 1:
+                check_tasks()
+
+            elif ans == 2 or 3:
+                choice = str(input("What day do you want?\n 1. Monday\n 2. Tuesday\n 3. Wednesday\n 4. Thursday\n 5. Friday\n 6. Back to menu\nEnter (M, T, W, Th, F, Menu): "))
+                if choice in["m", "t", "w", "th", "f", "M", "T", "W", "Th", "TH", "F"]:
+                    choice = choice.lower()
+
+                    if ans == 2:
+                        show_sched(choice)
+
+                    elif ans == 3:
+                        cls = input("What class will be updated(period)?")
+                        upd = str(input("What do you wanna change (period, time, or teacher: p/t/teach)?"))
+                        if upd in ["P", "p", "T", "t", "teach", "Teach", "TEACH"]:
+                            upd = upd.lower()
+                        update_classes(choice, cls, upd)
+
+                elif choice in ["Menu", "menu"]:
+                    response = input("Would you like to proceed to menu (Y/N)? ")
+                    if response in ["Y", "y", "N", "n"]:
+                        if response.upper() == "N":
+                            break
+
+                else:
+                    print("Not a valid input")
+                    response = input("Would you like to continue (Y/N)? ")
+                    if response in list["Y", "y", "N", "n"]:
+                        if response.upper() == "N":
+                            break
+
+            elif ans == 4:
+                print("What subject is this?")
+                y = str(input("Enter year(yy)"))
+                m = str(input("Enter month(mm)"))
+                d = str(input("Enter day(dd)"))
+                h = str(input("Enter hour(HH)"))
+                mins = str(input("Enter minutes(MM)"))
+                update_tasks(y,m,d,h,mins)
+
+            elif ans == 0:
+                yes = False
+
+            elif choice in ["Menu", "menu"]:
+                response = input("Would you like to proceed to menu (Y/N)? ")
+                validate(response)
+
+    # This opens the json file for tasks.
+    with open('tasks.json', 'r') as f:
+        reqs = json.load(f)
+    with open('tasks.json', 'w') as f:
+        json.dump(reqs, f, indent=3)
+
+
 
     print("Welcome to ChronoSmart!")
     time.sleep(1)
