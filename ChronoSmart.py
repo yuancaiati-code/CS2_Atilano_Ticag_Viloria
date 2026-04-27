@@ -137,10 +137,6 @@ try:
     with open('tasks.json', 'w') as f:
         json.dump(reqs, f, indent=3)
 
-    def notify():
-        time_list = []
-        tasks_lst= []
-
     with open('tasks.json', 'r') as f:
         reqs = json.load(f)
     with open('tasks.json', 'w') as f:
