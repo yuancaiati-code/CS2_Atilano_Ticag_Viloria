@@ -210,7 +210,7 @@ try:
         json.dump(reqs, f, indent=3)
 
 
-
+#Opening
     print("Welcome to ChronoSmart!")
     time.sleep(1)
     print("I am Chron, here to help you manage your time")
