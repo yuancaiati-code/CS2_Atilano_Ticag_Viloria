@@ -243,6 +243,7 @@ try:
     notify()
     menu()
 
+#Except, me :3
 except FileNotFoundError:
     print("Error: The file 'data.json' was not found")
 except json.JSONDecodeError as e:
