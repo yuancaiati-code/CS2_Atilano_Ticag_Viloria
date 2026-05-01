@@ -53,7 +53,35 @@ try:
     def update_tasks(res):
         if res == "+":
             print("What would you like to add?")
-            new_task = input("- ")
+            new_task = input("- Enter task: ")
+            new_sub = input("- Enter subject: ")
+
+            print("When is the due date? ")
+            y2 = input("- Enter year(yy)")
+            m2 = input("- Enter month(mm)")
+            d2 = input("- Enter day(dd)")
+            print("- Enter in military time:")
+            h2 = input(" > Enter hour(HH)")
+            mins2 = input(" > Enter minutes(MM)")
+
+            new_due_date = f"{y2}-{m2}-{d2}, {h2}:{mins2}"
+            new_priority = ""
+            new_prog = ""
+
+            print("- When do you want this to be finished? ")
+            y1 = input("- Enter year(yy)")
+            m1 = input("- Enter month(mm)")
+            d1 = input("- Enter day(dd)")
+            print("- Enter in military time:")
+            h1 = input(" > Enter hour(HH)")
+            mins1 = input(" > Enter minutes(MM)")
+
+            new_goal = f"{y1}-{m1}-{d1}, {h1}:{mins1}"
+            reached = False
+
+            added = {"task": new_task, "subject": new_sub, "due_date": new_due_date, "priority": new_priority, "progress": new_prog, "goal": new_goal, "goal_reached": reached}
+            reqs.append(added)
+
 
         elif res == "0":
             tsk = input("What task would you like to change? ")
@@ -93,11 +121,10 @@ try:
                     validate()
 
         elif res == "-":
-            delete = input("What class would you like to delete? (task): ")
+            delete = input("What task would you like to delete? (task): ")
             for task in reqs:
                 if delete == task["task"]:
-                    task.remove(task)
-
+                    reqs.remove(task)
 
 
     # 4. This updates classes wanted to change, based on the subject period.
@@ -151,7 +178,7 @@ try:
 
             elif res == "-":
                 delete = input("What class would you like to delete? (period): ")
-                for classes in chose:
+                for classes in schedule:
                     if delete == classes["period"]:
                         schedule.remove(classes)
 
