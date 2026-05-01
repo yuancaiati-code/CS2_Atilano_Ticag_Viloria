@@ -106,6 +106,7 @@ try:
                         task["due_date_and_time"] = date
 
             if upd == "p":
+
                 prog = int(input("How much have you finished out of a hundred percent? (percent without symbol/not decimal): "))
                 if prog > 0:
                     for task in reqs:
