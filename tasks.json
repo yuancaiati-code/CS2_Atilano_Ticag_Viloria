@@ -1,47 +1,38 @@
 [
    {
-      "task": "Project",
+      "task": "Coding Project",
       "subject": "CS",
       "due_date_and_time": "2026-04-27, 17:00",
-      "priority": "Not done",
+      "priority": "Cooked",
       "progress": "In progress",
       "goal": "2026-04-27, 17:00",
       "goal_reached": false
    },
    {
-      "task": "GitHub Updates",
-      "subject": "CS",
-      "due_date_and_time": "2026-03-06, 23:59",
-      "priority": "Done",
-      "progress": "In progress",
-      "goal": "2026-03-03, 23:59",
-      "goal_reached": null
-   },
-   {
-      "task": "Vlog/Podcast",
-      "subject": "Filipino",
-      "due_date_and_time": "2026-02-24, 23:59",
-      "priority": "Done",
-      "progress": "Submitted",
-      "goal": "2026-02-23, 23:59",
+      "task": "Stars video",
+      "subject": "ES",
+      "due_date_and_time": "2026-05-06, 23:59",
+      "priority": "High",
+      "progress": "Not started",
+      "goal": "2026-05-03, 23:59",
       "goal_reached": false
    },
    {
-      "task": "Sound Waves/EMS Video",
-      "subject": "Physics",
-      "due_date_and_time": "2026-03-06, 19:00",
-      "priority": "Done",
-      "progress": "Submitted",
-      "goal": "2026-03-05, 19:00",
-      "goal_reached": true
+      "task": "Table",
+      "subject": "ES",
+      "due_date_and_time": "2026-05-01, 23:59",
+      "priority": "Critical",
+      "progress": "In progress",
+      "goal": "2026-05-31, 23:59",
+      "goal_reached": false
    },
    {
-      "task": "Notebook",
-      "subject": "Physics",
-      "due_date_and_time": "2026-03-06, 19:00",
-      "priority": "Done",
-      "progress": "Submitted",
-      "goal": "2026-02-27, 19:00",
-      "goal_reached": true
+      "task": "Theatre",
+      "subject": "English",
+      "due_date_and_time": "2026-05-05, 19:00",
+      "priority": "High",
+      "progress": "In progress",
+      "goal": "2026-05-04, 19:00",
+      "goal_reached": false
    }
 ]

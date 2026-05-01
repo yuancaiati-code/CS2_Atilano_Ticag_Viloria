@@ -1,62 +1,62 @@
 [
    {
       "time": "8:00 - 8:50",
-      "period": "12:30 - 1:20",
+      "period": "Flag Ceremony",
       "teacher": "N/A"
    },
    {
       "time": "8:50 - 9:40",
-      "period": "12:30 - 1:20",
+      "period": "CS 2",
       "teacher": "Ma'am Kaye Alamag"
    },
    {
       "time": "9:40AM - 10:00AM",
-      "period": "12:30 - 1:20",
+      "period": "Break",
       "teacher": "None"
    },
    {
       "time": "10:00AM - 10:50AM",
-      "period": "12:30 - 1:20",
+      "period": "Filipino 2",
       "teacher": "Ma'am Wylyn Todyog"
    },
    {
       "time": "10:50AM - 11:40AM",
-      "period": "12:30 - 1:20",
+      "period": "AdTech 2",
       "teacher": "Ma'am Roxanne Doyayog"
    },
    {
       "time": "11:40AM - 12:30PM",
-      "period": "12:30 - 1:20",
-      "teacher": "None"
+      "period": "PE",
+      "teacher": "Ma'am Rosalie Zapico"
    },
    {
       "time": "12:30PM - 1:20PM",
-      "period": "12:30 - 1:20",
-      "teacher": "None"
+      "period": "ILP",
+      "teacher": null
    },
    {
       "time": "1:20PM - 2:10PM",
-      "period": "12:30 - 1:20",
-      "teacher": "None"
+      "period": "ILP",
+      "teacher": null
    },
    {
-      "time": "2:10PM - 3:00PM",
-      "period": "12:30 - 1:20",
+      "time": "12:30 - 13:30",
+      "period": "Algebra",
       "teacher": "Sir Joseph Tabadero"
    },
    {
       "time": "3:00PM - 3:20PM",
-      "period": "12:30 - 1:20",
+      "period": "Break",
       "teacher": "None"
    },
    {
       "time": "3:20PM - 4:10",
-      "period": "12:30 - 1:20",
+      "period": "ValEd",
       "teacher": "Ma'am Geraldine Orasing"
    },
    {
       "time": "4:10PM - 5:00PM",
-      "period": "12:30 - 1:20",
+      "period": "English",
       "teacher": "Ma'am Joana Marie Chaguille"
    }
 ]
