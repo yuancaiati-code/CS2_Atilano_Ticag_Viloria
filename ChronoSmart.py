@@ -189,14 +189,24 @@ try:
     #This makes sure that students are notified for subjects due in a week, day, and hour.
     def notify():
         time_list = []
+        goal_list = []
+        day_goal = []
         tasks_lst = []
+        tasks_lst2 = []
         for task in reqs:
             due = task["due_date_and_time"]
             due_date = datetime.strptime(due, "%Y-%m-%d, %H:%M")
+            goal = task["goal"]
+            set_goal = datetime.strptime(goal, "%Y-%m-%d, %H:%M")
+            days = due_date - set_goal
             time_now = datetime.now()
+            days_from_now = due_date - time_now
             time_left = due_date - time_now
             time_list.append(time_left)
             tasks_lst.append((time_left, task))
+            goal_list.append(days)
+            day_goal.append(days_from_now)
+            tasks_lst2.append((goal_list, day_goal, task))
 
         one_day_left = []
         one_week_left = []
@@ -214,6 +224,17 @@ try:
                 task["priority"] = "Critical"
             elif timedelta(minutes=1) > time_left:
                 overdue.append((time_left, task))
+                task["priority"] = "Cooked"
+
+        for goal_list, day_goal, task in tasks_lst2:
+            if task["progress"] == "Submitted":
+                if goal_list >= day_goal:
+                    task["goal_reached"] = True
+                else:
+                    task["goal_reached"] = False
+            else:
+                task["goal_reached"] = False
+
 
         print("Tasks due in one week:")
         if not one_week_left:
@@ -234,17 +255,20 @@ try:
             print(None)
 
         else:
-            for sub, task in one_day_left:
+            for sub, task in one_hour_left:
                 print(f"{task['task']} - {task['subject']}")
 
         if not overdue:
             print(None)
 
+        else:
+            for sub, task in overdue:
+                print(f"{task['task']} - {task['subject']}")
+
 
     #This is for the user interface, which decides what is needed to access based on the user's decision.
     def menu():
-        yes = True
-        while yes:
+        while True:
             time.sleep(2)
             print("")
             print("Menu: \n 1. Check Tasks\n 2. Check Schedule\n 3. Update Class\n 4. Update Tasks\n 0. Exit")
@@ -277,7 +301,7 @@ try:
                 update_tasks(response)
 
             elif ans == 0:
-                yes = False
+                break
 
             elif choice in ["Menu", "menu"]:
                 validate()
