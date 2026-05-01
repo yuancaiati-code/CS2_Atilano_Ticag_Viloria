@@ -1,3 +1,4 @@
+
 #Tasks needed to be done by group: Fix errors and make sure they are up to date:
     #1. While loops
     #2. Outputs
@@ -20,11 +21,7 @@ try:
             json.dump(data,f1,indent=3)
 
     #This function is for validating yes and no inputs.
-    def validate():
-        res = input("Would you like to continue? (Y/N)")
-        if res in ["Y", "y", "N", "n"]:
-            if res.upper() == "N":
-                return False
+
 
     # 1. This outputs all the tasks with their subjects and due dates.
     def check_tasks():
@@ -106,6 +103,7 @@ try:
                         task["due_date_and_time"] = date
 
             if upd == "p":
+
                 prog = int(input("How much have you finished out of a hundred percent? (percent without symbol/not decimal): "))
                 if prog > 0:
                     for task in reqs:
@@ -118,7 +116,7 @@ try:
                         task["progress"] = "Finished"
                 else:
                     print("That's not a valid input.")
-                    validate()
+
 
         elif res == "-":
             delete = input("What task would you like to delete? (task): ")
@@ -146,35 +144,39 @@ try:
             elif res == "0":
                 cls = input("What class will be updated (period)?")
                 upd = input("What do you wanna change; period, time, or teacher? (p/t/teach): ")
-                if upd in ["P", "p", "T", "t", "teach", "Teach", "TEACH"]:
-                    upd = upd.lower()
-                    if upd == "p":
-                        for classes in schedule:
-                            if classes["period"] == cls:
-                                new_per = input("What period would you want to change it to?: ")
-                                classes["period"] = new_per
-                            elif not classes["period"]:
+                while True:
+                    if upd.lower() in [ "p", "t", "teach"]:
+                        break
+                    else:
+                        print("Invalid input")
+
+                if upd == "p":
+                    for classes in schedule:
+                        if classes["period"] == cls:
+                            new_per = input("What period would you want to change it to?: ")
+                            classes["period"] = new_per
+                        elif not classes["period"]:
+                            print("Invalid input")
+
+                elif upd == "t":
+                    print("Please enter the following in military time: ")
+                    h1 = input("- What hour does it start(HH)?: ")
+                    m1 = input("- What minute does it start(MM)?: ")
+                    h2 = input("- What hour does it end?(HH)?: ")
+                    m2 = input("- What minute does it end?(MM)?: ")
+                    for classes in schedule:
+                        if classes["period"] == cls:
+                            tim = f"{h1}:{m1} - {h2}:{m2}"
+                            classes["time"] = tim
+
+                        elif not classes["period"]:
                                 print("Invalid input")
 
-                    elif upd == "t":
-                        print("Please enter the following in military time: ")
-                        h1 = input("- What hour does it start(HH)?: ")
-                        m1 = input("- What minute does it start(MM)?: ")
-                        h2 = input("- What hour does it end?(HH)?: ")
-                        m2 = input("- What minute does it end?(MM)?: ")
-                        for classes in schedule:
-                            if classes["period"] == cls:
-                                tim = f"{h1}:{m1} - {h2}:{m2}"
-                                classes["time"] = tim
-
-                            elif not classes["period"]:
-                                print("Invalid input")
-
-                    elif upd == "teach":
-                        for classes in schedule:
-                            if classes["period"] == cls:
-                                new_tea = input("Who is your knew teacher? ")
-                                classes["teacher"] = new_tea
+                elif upd == "teach":
+                    for classes in schedule:
+                        if classes["period"] == cls:
+                            new_tea = input("Who is your knew teacher? ")
+                            classes["teacher"] = new_tea
 
             elif res == "-":
                 delete = input("What class would you like to delete? (period): ")
@@ -182,7 +184,7 @@ try:
                     if delete == classes["period"]:
                         schedule.remove(classes)
 
-            validate()
+
 
             save_sched(chose, schedule)
 
@@ -271,66 +273,39 @@ try:
         while True:
             time.sleep(2)
             print("")
-            print("=" * 124)
-            print("                                       _____________________________________________")
-            print(r"                                     [_____________________________________________]")
-            print(r"                                        |WW|     //===================\\     |WW|")
-            print(r"                                        |  |   //                       \\   |  |")
-            print(r"                                        |  |  ||                    | |  ||  |  |")
-            print(r"                                        |  |  ||                    | |  ||  |  |")
-            print(r"                                        |  |  ||                    | |  ||  |  |")
-            print(r"                                        |  |  ||                    | |  ||  |  |")
-            print(r"                                        |  |  ||                    | |  ||  |  |")
-            print(r"                                        |  |  ||~~~~~~~~~~~~~~~~~~~~|-|~~||  |  |")
-            print(r"                                        |  |  ||XXXXXXXXXXXXXXXXXXXX| |XX||  |  |")
-            print(r"                                        |  |  ||VVV __________________VVV||  |  |")
-            print(r"                                        |  |   \\X |       MENU       | //   |  |")
-            print(r"                                        |  |     \ |1. Check tasks    | /    |  |")
-            print(r"                                        |  |       |2. Check schedule |      |  |")
-            print(r"                                        |  |       |3. Update tasks   |      |  |")
-            print(r"                                        |  |       |4. Update schedule|      |  |")
-            print(r"                                        |  |              ||--||             |  |")
-            print(r"                                        |  |            //  **  \\           |  |")
-            print(r"                                        |  |          //    *  \  \\         |  |")
-            print(r"                                        |  |        //      *    \  \\       |  |")
-            print(r"                                        |  |      //        *     \   \\     |  |")
-            print(r"                                        |  |    //           `     \   \\    |  |")
-            print(r"                                        |  |   //         A|##|AAA      \\   |  |")
-            print(r"                                        |  |  ||    A AAAAAAAAAAAAAA| |  ||  |  |")
-            print(r"                                        |  |  || AAAAAAAAAAAAAAAAAAA| |AA||  |  |")
-            print(r"                                        |  |  ||XXXXXXXXXXXXXXXXXXXX| |XX||  |  |")
-            print(r"                                        |  |  ||XXXXXXXXXXXXXXXXXXXX| |XX||  |  |")
-            print(r"                                        |  |  ||XXXXXXXXXXXXXXXXXXXX| |XX||  |  |")
-            print(r"                                        |  |  ||XXXXXXXXXXXXXXXXXXXX| |XX||  |  |")
-            print(r"                                        |  |  ||XXXXXXXXXXXXXXXXXXXX| |XX||  |  |")
-            print(r"                                        |  |  ||XXXXXXXXXXXXXXXXXXXX| |XX||  |  |")
-            print(r"                                        |  |   \\xxxxxxxxxxxxxxxxxxxxxxx//   |  |")
-            print(r"                                       _|MM|_____\\===================//_____|MM|_")
-            print(r"                                      [___________________________________________]")
-            print("=" * 124)
+            print("Menu: \n 1. Check Tasks\n 2. Check Schedule\n 3. Update Class\n 4. Update Tasks\n 0. Exit")
             time.sleep(0.5)
-            ans = int(input(" \nWhat do you want to do? (1/2/3/4/0): "))
+            while True:
+                ans = (input(" \nWhat do you want to do? (1/2/3/4/0): "))
+                if ans in ["1","2","3","4","0"]:
+                    ans = int(ans)
+                    break
+                else:
+                    print("Not a valid input")
+
             if ans == 1:
                 check_tasks()
 
             elif ans == 2 or 3:
-                choice = input("What day do you want?\n - Monday\n - Tuesday\n - Wednesday\n - Thursday\n - Friday\n - Back to menu\nEnter (M/T/W/Th/F/Menu): ")
-                if choice in["m", "t", "w", "th", "f", "M", "T", "W", "Th", "TH", "F"]:
-                    choice = choice.lower()
+                while True:
+                    choice = input("What day do you want?\n - Monday\n - Tuesday\n - Wednesday\n - Thursday\n - Friday\n - Back to menu\nEnter (M/T/W/Th/F/Menu): ")
+                    if choice.lower() in["m", "t", "w", "th", "f", "menu"]:
+                        break
+                    else:
+                        print("Not a valid input")
 
-                    if ans == 2:
-                        show_sched(choice)
+                if ans == 2:
+                    show_sched(choice)
 
-                    elif ans == 3:
-                        response = input("Would you like to add, change, or delete from the schedule? (+, 0, -): ")
-                        update_classes(choice, response)
+                elif ans == 3:
+                    response = input("Would you like to add, change, or delete from the schedule? (+, 0, -): ")
+                    update_classes(choice, response)
 
                 elif choice in ["Menu", "menu"]:
-                    validate()
+                    break
 
-                else:
-                    print("Not a valid input")
-                    validate()
+
+
 
             elif ans == 4:
                 response = input("Would you like to add, change, or delete from the schedule? (+, 0, -): ")
@@ -339,8 +314,8 @@ try:
             elif ans == 0:
                 break
 
-            elif choice in ["Menu", "menu"]:
-                validate()
+
+
 
     # This opens the json file for tasks.
     with open('tasks.json', 'r') as f:
@@ -358,7 +333,7 @@ try:
     time.sleep(1)
     for i in range(3):
         print("")
-    print("="*124)
+
     print(r"                                         =========                       ========")
     print(r"                                       (============)                 (============)")
     print(r"                                      =============== ------  ------  ==============")
@@ -380,7 +355,6 @@ try:
     print(r"                                          _\_______  /\  / // /  /  /\ /  /\//  /\ / //_/\\/ /\__\/")
     print(r"                                         /_/\_____/_/ //____/__/__/ //_____   / // /\\_\/ /____/\  ")
     print(r"                                         \__________\/ \__________\/ \_____\\_\/ \_\/     \____\/ ")
-    print("="*124)
     time.sleep(2)
     notify()
     print("")
