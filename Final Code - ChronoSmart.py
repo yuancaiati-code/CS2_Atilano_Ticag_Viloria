@@ -56,7 +56,7 @@ try:
         if count == 0:
             print("Congratulations on submitting all your tasks!!")
 
-        if accomplished > 1 and win < count:
+        if accomplished > 0 and win < count:
             print(f"Good job for finishing {accomplished} tasks. Regardless of not finishing them all based on your goal, it's great to see that you finished them")
             if accomplished == 1 and win == 0:
                 print(f"Good job for finishing 1 task. Regardless of not finishing them all based on your goal, it's great to see that you finished one already. ")
@@ -179,6 +179,11 @@ try:
         for task in reqs:
             if task["submission_status"]:
                 reqs.remove(task)
+
+        with open('tasks.json', 'w') as f:
+            json.dump(reqs, f, indent=3)
+
+
 
     #4. This updates classes for adding, changing, or deleting a task.
         #The parameter chose is for the specific day json file, and res is the user's choice of update.
@@ -338,6 +343,9 @@ try:
             for sub, task in overdue:
                 print(f"{task['task']} - {task['subject']}")
 
+        with open('tasks.json', 'w') as f:
+            json.dump(reqs, f, indent=3)
+
     #This is where the menu is.
     #It calls all sorts of functions based on the user's input.
     def menu():
@@ -416,8 +424,6 @@ try:
 
     with open('tasks.json', 'r') as f:
         reqs = json.load(f)
-    with open('tasks.json', 'w') as f:
-        json.dump(reqs, f, indent=3)
 
         # Opening
         print("Welcome to ChronoSmart!")
@@ -446,7 +452,7 @@ try:
         print(r"                                     []--- 8 ___________------------------------- 4 --[]      __")
         print(r"                                       []-- / _________/\ --------------------------[]     __/ /\__")
         print(r"                                           /_/\________\/ __ ________ - ______ _ ]  __ __ /__   __/\ ")
-        print(r"                                          _\_______  /\  / // /  /  /\ /  /\//  /\ / //_/\\/ /\__\/")
+        print(r"                                          _\_______  /\  / // /  /  /\ /  /\//  /\ / //_/\\/ /1\__\/")
         print(r"                                         /_/\_____/_/ //____/__/__/ //_____   / // /\\_\/ /____/\  ")
         print(r"                                         \__________\/ \__________\/ \_____\\_\/ \_\/     \____\/ ")
         print("")
