@@ -1,8 +1,3 @@
-#Tasks needed to be done by group: Fix errors and make sure they are up to date:
-    #1. While loops
-    #2. Outputs
-    #3. Finish update task function
-
 #This imports all needed modules for code.
 import json
 import time
@@ -25,6 +20,11 @@ try:
         if res in ["Y", "y", "N", "n"]:
             if res.upper() == "N":
                 return False
+            elif res.upper() == "Y":
+                return True
+        else:
+            return validate()
+
 
     # 1. This outputs all the tasks with their subjects and due dates.
     def check_tasks():
@@ -77,9 +77,10 @@ try:
             mins1 = input(" > Enter minutes(MM)")
 
             new_goal = f"{y1}-{m1}-{d1}, {h1}:{mins1}"
+            new_submission_status = False
             reached = False
 
-            added = {"task": new_task, "subject": new_sub, "due_date": new_due_date, "priority": new_priority, "progress": new_prog, "goal": new_goal, "goal_reached": reached}
+            added = {"task": new_task, "subject": new_sub, "due_date": new_due_date, "priority": new_priority, "progress": new_prog, "goal": new_goal, "submission status": new_submission_status, "goal_reached": reached}
             reqs.append(added)
 
 
@@ -106,7 +107,6 @@ try:
                         task["due_date_and_time"] = date
 
             if upd == "p":
-
                 prog = int(input("How much have you finished out of a hundred percent? (percent without symbol/not decimal): "))
                 if prog > 0:
                     for task in reqs:
@@ -126,62 +126,64 @@ try:
             for task in reqs:
                 if delete == task["task"]:
                     reqs.remove(task)
+        for task in reqs:
+            if task["submission status"]:
+                reqs.remove(task)
 
 
     # 4. This updates classes wanted to change, based on the subject period.
     def update_classes(chose, res):
-        while True:
-            schedule = get_sched(chose)
-            if res == "+":
-                print("What would you like to add?")
-                new_class = input("Enter period: ")
-                h1 = input("- What hour does it start(HH)?: ")
-                m1 = input("- What minute does it start(MM)?: ")
-                h2 = input("- What hour does it end?(HH)?: ")
-                m2 = input("- What minute does it end?(MM)?: ")
-                new_teacher = input("Enter teacher: ")
-                new_tim = f"{ h1}:{m1} - {h2}:{m2}"
-                added = {"time": new_tim, "period": new_class, "teacher": new_teacher}
+        schedule = get_sched(chose)
+        if res == "+":
+            print("What would you like to add?")
+            new_class = input("Enter period: ")
+            h1 = input("- What hour does it start(HH)?: ")
+            m1 = input("- What minute does it start(MM)?: ")
+            h2 = input("- What hour does it end?(HH)?: ")
+            m2 = input("- What minute does it end?(MM)?: ")
+            new_teacher = input("Enter teacher: ")
+            new_tim = f"{ h1}:{m1} - {h2}:{m2}"
+            added = {"time": new_tim, "period": new_class, "teacher": new_teacher}
 
-                schedule.append(added)
-            elif res == "0":
-                cls = input("What class will be updated (period)?")
-                upd = input("What do you wanna change; period, time, or teacher? (p/t/teach): ")
-                if upd in ["P", "p", "T", "t", "teach", "Teach", "TEACH"]:
-                    upd = upd.lower()
-                    if upd == "p":
-                        for classes in schedule:
-                            if classes["period"] == cls:
-                                new_per = input("What period would you want to change it to?: ")
-                                classes["period"] = new_per
-                            elif not classes["period"]:
-                                print("Invalid input")
+            schedule.append(added)
+        elif res == "0":
+            cls = input("What class will be updated (period)?")
+            upd = input("What do you wanna change; period, time, or teacher? (p/t/teach): ")
+            if upd in ["P", "p", "T", "t", "teach", "Teach", "TEACH"]:
+                upd = upd.lower()
+                if upd == "p":
+                    for classes in schedule:
+                        if classes["period"] == cls:
+                            new_per = input("What period would you want to change it to?: ")
+                            classes["period"] = new_per
+                        elif not classes["period"]:
+                            print("Invalid input")
 
-                    elif upd == "t":
-                        print("Please enter the following in military time: ")
-                        h1 = input("- What hour does it start(HH)?: ")
-                        m1 = input("- What minute does it start(MM)?: ")
-                        h2 = input("- What hour does it end?(HH)?: ")
-                        m2 = input("- What minute does it end?(MM)?: ")
-                        for classes in schedule:
-                            if classes["period"] == cls:
-                                tim = f"{h1}:{m1} - {h2}:{m2}"
-                                classes["time"] = tim
+                elif upd == "t":
+                    print("Please enter the following in military time: ")
+                    h1 = input("- What hour does it start(HH)?: ")
+                    m1 = input("- What minute does it start(MM)?: ")
+                    h2 = input("- What hour does it end?(HH)?: ")
+                    m2 = input("- What minute does it end?(MM)?: ")
+                    for classes in schedule:
+                        if classes["period"] == cls:
+                            tim = f"{h1}:{m1} - {h2}:{m2}"
+                            classes["time"] = tim
 
-                            elif not classes["period"]:
-                                print("Invalid input")
+                        elif not classes["period"]:
+                            print("Invalid input")
 
-                    elif upd == "teach":
-                        for classes in schedule:
-                            if classes["period"] == cls:
-                                new_tea = input("Who is your knew teacher? ")
-                                classes["teacher"] = new_tea
+                elif upd == "teach":
+                    for classes in schedule:
+                        if classes["period"] == cls:
+                            new_tea = input("Who is your knew teacher? ")
+                            classes["teacher"] = new_tea
 
-            elif res == "-":
-                delete = input("What class would you like to delete? (period): ")
-                for classes in schedule:
-                    if delete == classes["period"]:
-                        schedule.remove(classes)
+        elif res == "-":
+            delete = input("What class would you like to delete? (period): ")
+            for classes in schedule:
+                if delete == classes["period"]:
+                    schedule.remove(classes)
 
             validate()
 
@@ -264,21 +266,63 @@ try:
 
         else:
             for sub, task in overdue:
-                print(f"{task['task']} - {task['subject']}")
+                print(f"{task['ta sk']} - {task['subject']}")
 
 
     #This is for the user interface, which decides what is needed to access based on the user's decision.
     def menu():
-        while True:
-            time.sleep(2)
-            print("")
-            print("Menu: \n 1. Check Tasks\n 2. Check Schedule\n 3. Update Class\n 4. Update Tasks\n 0. Exit")
-            time.sleep(0.5)
-            ans = int(input(" \nWhat do you want to do? (1/2/3/4/0): "))
-            if ans == 1:
-                check_tasks()
+        time.sleep(2)
+        print("")
+        print("=" * 138)
+        print("                                       _____________________________________________")
+        print(r"                                     [_____________________________________________]")
+        print(r"                                        |WW|     //===================\\     |WW|")
+        print(r"                                        |  |   //                       \\   |  |")
+        print(r"                                        |  |  ||                    | |  ||  |  |")
+        print(r"                                        |  |  ||                    | |  ||  |  |")
+        print(r"                                        |  |  ||                    | |  ||  |  |")
+        print(r"                                        |  |  ||                    | |  ||  |  |")
+        print(r"                                        |  |  ||                    | |  ||  |  |")
+        print(r"                                        |  |  ||~~~~~~~~~~~~~~~~~~~~|-|~~||  |  |")
+        print(r"                                        |  |  ||XXXXXXXXXXXXXXXXXXXX| |XX||  |  |")
+        print(r"                                        |  |  ||_________________________||  |  |")
+        print(r"                                        |  |   \|         MENU          |//  |  |")
+        print(r"                                        |  |    |1. Check tasks         |/   |  |")
+        print(r"                                        |  |    |2. Check schedule      |    |  |")
+        print(r"                                        |  |    |3. Update tasks        |    |  |")
+        print(r"                                        |  |    |4. Update schedule     |    |  |")
+        print(r"                                        |  |    |_______________________|    |  |")
+        print(r"                                        |  |            //  **  \\           |  |")
+        print(r"                                        |  |          //    *  \  \\         |  |")
+        print(r"                                        |  |        //      *    \  \\       |  |")
+        print(r"                                        |  |      //        *     \   \\     |  |")
+        print(r"                                        |  |    //           `     \   \\    |  |")
+        print(r"                                        |  |   //         A|##|AAA      \\   |  |")
+        print(r"                                        |  |  ||    A AAAAAAAAAAAAAA| |  ||  |  |")
+        print(r"                                        |  |  || AAAAAAAAAAAAAAAAAAA| |AA||  |  |")
+        print(r"                                        |  |  ||XXXXXXXXXXXXXXXXXXXX| |XX||  |  |")
+        print(r"                                        |  |  ||XXXXXXXXXXXXXXXXXXXX| |XX||  |  |")
+        print(r"                                        |  |  ||XXXXXXXXXXXXXXXXXXXX| |XX||  |  |")
+        print(r"                                        |  |  ||XXXXXXXXXXXXXXXXXXXX| |XX||  |  |")
+        print(r"                                        |  |  ||XXXXXXXXXXXXXXXXXXXX| |XX||  |  |")
+        print(r"                                        |  |  ||XXXXXXXXXXXXXXXXXXXX| |XX||  |  |")
+        print(r"                                        |  |   \\xxxxxxxxxxxxxxxxxxxxxxx//   |  |")
+        print(r"                                       _|MM|_____\\===================//_____|MM|_")
+        print(r"                                      [___________________________________________]")
+        print("=" * 138)
 
-            elif ans == 2 or 3:
+        print("Menu: \n 1. Check Tasks\n 2. Check Schedule\n 3. Update Class\n 4. Update Tasks\n 0. Exit")
+        time.sleep(0.5)
+        ans = int(input(" \nWhat do you want to do? (1/2/3/4/0): "))
+        if ans == 1:
+            yis = True
+            while yis:
+                check_tasks()
+                yis = validate()
+
+        elif ans == 2 or 3:
+            yis = True
+            while yis:
                 choice = input("What day do you want?\n - Monday\n - Tuesday\n - Wednesday\n - Thursday\n - Friday\n - Back to menu\nEnter (M/T/W/Th/F/Menu): ")
                 if choice in["m", "t", "w", "th", "f", "M", "T", "W", "Th", "TH", "F"]:
                     choice = choice.lower()
@@ -290,22 +334,23 @@ try:
                         response = input("Would you like to add, change, or delete from the schedule? (+, 0, -): ")
                         update_classes(choice, response)
 
-                elif choice in ["Menu", "menu"]:
-                    validate()
+                    elif choice in ["Menu", "menu"]:
+                        menu(yis)
 
                 else:
-                    print("Not a valid input")
-                    validate()
+                    print("Not a valid input.")
+                    yis = validate()
 
-            elif ans == 4:
+        elif ans == 4:
+            while yis:
                 response = input("Would you like to add, change, or delete from the schedule? (+, 0, -): ")
                 update_tasks(response)
+                yis = validate()
 
-            elif ans == 0:
-                break
+        elif ans == 0:
+            yes = validate()
 
-            elif choice in ["Menu", "menu"]:
-                validate()
+
 
     # This opens the json file for tasks.
     with open('tasks.json', 'r') as f:
@@ -323,7 +368,7 @@ try:
     time.sleep(1)
     for i in range(3):
         print("")
-
+    print("="*138)
     print(r"                                         =========                       ========")
     print(r"                                       (============)                 (============)")
     print(r"                                      =============== ------  ------  ==============")
@@ -345,11 +390,15 @@ try:
     print(r"                                          _\_______  /\  / // /  /  /\ /  /\//  /\ / //_/\\/ /\__\/")
     print(r"                                         /_/\_____/_/ //____/__/__/ //_____   / // /\\_\/ /____/\  ")
     print(r"                                         \__________\/ \__________\/ \_____\\_\/ \_\/     \____\/ ")
+    print("="*138)
     time.sleep(2)
     notify()
     print("")
     print("Take a look around, this is our menu:")
-    menu()
+    time.sleep(1)
+    cont = True
+    while cont:
+        menu(cont)
 
 #Except, me :3
 except FileNotFoundError:

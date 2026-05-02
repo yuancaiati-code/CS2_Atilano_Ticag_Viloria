@@ -6,6 +6,7 @@
       "priority": "Cooked",
       "progress": "In progress",
       "goal": "2026-04-27, 17:00",
+      "submission_status": false,
       "goal_reached": false
    },
    {
@@ -13,17 +14,19 @@
       "subject": "ES",
       "due_date_and_time": "2026-05-06, 23:59",
       "priority": "High",
-      "progress": "Submitted",
+      "progress": "In progress",
       "goal": "2026-05-03, 23:59",
+      "submission_status": false,
       "goal_reached": false
    },
    {
       "task": "Table",
       "subject": "ES",
       "due_date_and_time": "2026-05-01, 23:59",
-      "priority": "Critical",
-      "progress": "In progress",
+      "priority": "No",
+      "progress": "Finished",
       "goal": "2026-05-31, 23:59",
+      "submission_status": true,
       "goal_reached": false
    },
    {
@@ -33,6 +36,7 @@
       "priority": "High",
       "progress": "In progress",
       "goal": "2026-05-04, 19:00",
+      "submission_status": false,
       "goal_reached": false
    }
 ]
