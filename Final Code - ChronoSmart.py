@@ -127,55 +127,79 @@ try:
         elif res == "0":
             #This determines which task needs to be updated
             tsk = input("What task would you like to change? ")
-            upd = input("What do you want to change; task, subject, due date, goal, or progress? (t/s/d/g/p): ")
+            upd = input("What do you want to change; task, subject, due date, progress, goal or submission status?? (t/s/d/p/g/ss): ")
 
-            #This updates the task name.
-            if upd == "t":
-                new_task = input("What will you change it to?: ")
-                for task in reqs:
-                    if task["task"] == tsk:
-                        task["task"] = new_task
-
-            #This updates the task's due date and hour of due submission.
-            elif upd == "d":
-                y = input("- Enter year(yy)")
-                m = input("- Enter month(mm)")
-                d = input("- Enter day(dd)")
-                print("- Enter in military time:")
-                h = input(" > Enter hour(HH)")
-                mins = input(" > Enter minutes(MM)")
-
-                for task in reqs:
-                    if task["task"] == tsk:
-                        date = f"{y}-{m}-{d}, {h}:{mins}"
-                        task["due_date_and_time"] = date
-
-            #This updates the progress of the task, based on the whole number percentage of how much is done.
-            if upd == "p":
-                prog = int(input("How much have you finished out of a hundred percent? (percent without symbol/not decimal): "))
-                if prog > 0:
+            if upd in ["T", "S", "D", "P", "G", "SS", "Ss", "t", "s", "d", "p", "g", "ss"]:
+                upd = upd.lower()
+                #This updates the task name.
+                if upd == "t":
+                    new_task = input("What will you change it to?: ")
                     for task in reqs:
-                        task["progress"] = "Not started"
-                elif prog < 100:
-                    for task in reqs:
-                        task["progress"] = "In progress"
-                elif prog == 100:
-                    for task in reqs:
-                        task["progress"] = "Finished"
+                        if task["task"] == tsk:
+                            task["task"] = new_task
+
+                #This updates the task's due date and hour of due submission.
+                elif upd == "d" or upd == "g":
+                    y = input("- Enter year (yy): ")
+                    m = input("- Enter month (mm): ")
+                    d = input("- Enter day (dd): ")
+                    print("- Enter in military time:")
+                    h = input(" > Enter hour (HH): ")
+                    mins = input(" > Enter minutes (MM): ")
+
+                    if upd == "d":
+                        for task in reqs:
+                            if task["task"] == tsk:
+                                date = f"{y}-{m}-{d}, {h}:{mins}"
+                                task["due_date_and_time"] = date
+
+                    else:
+                        for task in reqs:
+                            if task["task"] == tsk:
+                                date = f"{y}-{m}-{d}, {h}:{mins}"
+                                task["goal"] = date
+
+                #This updates the progress of the task, based on the whole number percentage of how much is done.
+                elif upd == "p":
+                    prog = int(input("How much have you finished out of a hundred percent? (percent without symbol/not decimal): "))
+                    if prog > 0:
+                        for task in reqs:
+                            task["progress"] = "Not started"
+                    elif prog < 100:
+                        for task in reqs:
+                            task["progress"] = "In progress"
+                    elif prog == 100:
+                        for task in reqs:
+                            task["progress"] = "Finished"
+                    else:
+                        print("Invalid input.")
+
+                elif upd == "ss":
+                    sub_stats = input("Did you submit this task? (Y/N): ")
+                    if sub_stats in ["Y", "y", "n", "N"]:
+                        sub_stats = sub_stats.lower()
+                        for task in reqs:
+                            if task["task"] == tsk:
+                                if sub_stats == "y" :
+                                    task["submission_status"] = True
+                                else:
+                                    task["submission_status"] = False
+                    else:
+                        print("Invalid input")
+
                 else:
                     print("Invalid input.")
-                    validate()
 
-        #This deletes a task manually, even if it isn't marked as True in submission status.
+
+            #This deletes a task manually, even if it isn't marked as True in submission status.
         elif res == "-":
             delete = input("What task would you like to delete? (task): ")
             for task in reqs:
                 if delete == task["task"]:
                     reqs.remove(task)
-        else:
-            print("Invalid input")
-            validate()
-        #This automatically deletes all submitted tasks.
+                else:
+                    print("Invalid input")
+            #This automatically deletes all submitted tasks.
         for task in reqs:
             if task["submission_status"]:
                 reqs.remove(task)

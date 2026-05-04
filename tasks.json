@@ -18,15 +18,5 @@
       "goal": "2026-05-03, 23:59",
       "submission_status": false,
       "goal_reached": false
-   },
-   {
-      "task": "Theatre",
-      "subject": "English",
-      "due_date_and_time": "2026-05-05, 19:00",
-      "priority": "High",
-      "progress": "In progress",
-      "goal": "2026-05-04, 19:00",
-      "submission_status": false,
-      "goal_reached": false
    }
 ]
