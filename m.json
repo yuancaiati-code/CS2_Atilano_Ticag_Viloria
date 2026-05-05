@@ -1,12 +1,12 @@
 [
    {
       "time": "8:00 - 8:50",
-      "period": "Flag Ceremony",
+      "period": "FlagCem",
       "teacher": "N/A"
    },
    {
       "time": "8:50 - 9:40",
-      "period": "CS 2",
+      "period": "CS2",
       "teacher": "Ma'am Kaye Alamag"
    },
    {
@@ -16,12 +16,12 @@
    },
    {
       "time": "10:00AM - 10:50AM",
-      "period": "Filipino 2",
+      "period": "Fil2",
       "teacher": "Ma'am Wylyn Todyog"
    },
    {
       "time": "10:50AM - 11:40AM",
-      "period": "AdTech 2",
+      "period": "AdT2",
       "teacher": "Ma'am Roxanne Doyayog"
    },
    {
@@ -31,7 +31,7 @@
    },
    {
       "time": "12:30PM - 1:20PM",
-      "period": "ILP",
+      "period": "Lunch",
       "teacher": null
    },
    {
@@ -41,7 +41,7 @@
    },
    {
       "time": "12:30 - 13:30",
-      "period": "Algebra",
+      "period": "Math2",
       "teacher": "Sir Joseph Tabadero"
    },
    {
@@ -58,10 +58,5 @@
       "time": "4:10PM - 5:00PM",
       "period": "English",
       "teacher": "Ma'am Joana Marie Chaguille"
-   },
-   {
-      "time": "11:30 - 12:30",
-      "period": "Health",
-      "teacher": "Sally Zapico"
    }
 ]

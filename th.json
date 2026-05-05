@@ -1,12 +1,12 @@
 [
    {
       "time": "8:00AM - 8:50AM",
-      "period": "Chemistry",
+      "period": "Chem1",
       "teacher": "Sir Juanito Reyes III"
    },
    {
       "time": "8:50AM - 9:40AM",
-      "period": "SocSci",
+      "period": "SocSci2",
       "teacher": "Ma'am Krystel Galong"
    },
    {
@@ -21,13 +21,13 @@
    },
    {
       "time": "10:50AM - 11:40AM",
-      "period": "Lab",
-      "teacher": ""
+      "period": "AdT2",
+      "teacher": "Ma'am Roxanne Doyayog"
    },
    {
       "time": "11:40AM - 12:30PM",
-      "period": "Lab",
-      "teacher": ""
+      "period": "Wellness",
+      "teacher": "None"
    },
    {
       "time": "12:30PM - 1:20PM",
@@ -36,12 +36,12 @@
    },
    {
       "time": "1:20PM - 2:10PM",
-      "period": "Music",
+      "period": "Phys1",
       "teacher": "Ma'am Fabella Tabadero"
    },
    {
       "time": "2:10PM - 3:00PM",
-      "period": "Geometry",
+      "period": "Math3",
       "teacher": "Ma'am Maria Bastian"
    },
    {
@@ -51,12 +51,12 @@
    },
    {
       "time": "3:20PM - 4:10",
-      "period": "Biology",
+      "period": "Bio",
       "teacher": "Ma'am Frances Aniceto"
    },
    {
       "time": "4:10PM - 5:00PM",
-      "period": "English",
+      "period": "Eng",
       "teacher": "Ma'am Joana Chaguile"
    }
 ]

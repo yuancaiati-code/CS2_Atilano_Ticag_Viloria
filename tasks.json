@@ -1,22 +1,32 @@
 [
    {
-      "task": "Coding Project",
+      "task": "CodeProject",
       "subject": "CS",
       "due_date_and_time": "2026-04-27, 17:00",
       "priority": "Cooked",
-      "progress": "In progress",
+      "progress": "Not started",
       "goal": "2026-04-27, 17:00",
       "submission_status": false,
       "goal_reached": false
    },
    {
-      "task": "Stars video",
+      "task": "StarsVid",
       "subject": "ES",
       "due_date_and_time": "2026-05-06, 23:59",
-      "priority": "Medium",
-      "progress": "In progress",
+      "priority": "High",
+      "progress": "Not started",
       "goal": "2026-05-03, 23:59",
       "submission_status": false,
+      "goal_reached": false
+   },
+   {
+      "task": "Reflection",
+      "subject": "Math 2",
+      "due_date_and_time": "2026-05-06, 17:00",
+      "priority": "High",
+      "progress": "Not started",
+      "goal": "2026-05-05, 17:00",
+      "submission status": false,
       "goal_reached": false
    }
 ]

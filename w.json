@@ -1,38 +1,38 @@
 [
    {
       "time": "8:00AM - 8:50AM",
-      "period": "SocSci",
+      "period": "SocSci2",
       "teacher": "Ma'am Krystel Galong"
    },
    {
       "time": "8:50AM - 9:40AM",
-      "period": "CS",
+      "period": "CS2",
       "teacher": "Ma'am Kaye Alamag"
    },
    {
       "time": "9:40AM - 10:00AM",
       "period": "Break",
-      "teacher": "None"
+      "teacher":  null
    },
    {
       "time": "10:00AM - 10:50AM",
-      "period": "Fil",
+      "period": "Fil2",
       "teacher": "Ma'am Wylyn Todyog"
    },
    {
       "time": "10:50AM - 11:40AM",
-      "period": "AdTech",
+      "period": "AdT2",
       "teacher": "Ma'am Roxanne Doyayog"
    },
    {
       "time": "11:40AM - 12:30PM",
       "period": "Wellness",
-      "teacher": "None"
+      "teacher": null
    },
    {
       "time": "12:30PM - 1:20PM",
       "period": "Lunch",
-      "teacher": "None"
+      "teacher": null
    },
    {
       "time": "1:20PM - 2:10PM",
@@ -41,13 +41,13 @@
    },
    {
       "time": "2:10PM - 3:00PM",
-      "period": "Math 2",
+      "period": "Math2",
       "teacher": "Sir Joseph Tabadero"
    },
    {
       "time": "3:00PM - 3:20PM",
       "period": "Break",
-      "teacher": "None"
+      "teacher": null
    },
    {
       "time": "3:20PM - 4:10",
@@ -57,6 +57,6 @@
    {
       "time": "4:10PM - 5:00PM",
       "period": "ILP",
-      "teacher": "None"
+      "teacher": null
    }
 ]

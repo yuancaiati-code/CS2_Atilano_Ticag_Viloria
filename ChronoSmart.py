@@ -25,17 +25,24 @@ try:
         else:
             return validate()
 
+    def get_tasks():
+        with open('tasks.json', 'r') as f2:
+            return json.load(f2)
+
+    def save_tasks(data):
+        with open('tasks.json', 'w') as f2:
+            json.dump(data, f2, indent = 3)
 
     # 1. This outputs all the tasks with their subjects and due dates.
     def check_tasks():
+        tasks = get_tasks()
         print("Task ------> Subject ------> Due Date & Time ------> Priority ------> Progress ------> Goal ------> Is goal reached? ")
         tasks_to_do = []
-        for task in reqs:
+        for task in tasks:
             tasks_to_do.append((task["task"], task["subject"], task["due_date_and_time"], task["priority"],
                                 task["progress"], task["goal"], task["goal_reached"]))
         for to_do, subject, due_date_and_time, priority, progress, goal, goal_reached in tasks_to_do:
-            print(
-                f"{to_do}   :   {subject}   :   {due_date_and_time}   :   {priority}   :   {progress}   :   {goal}   :   {goal_reached}")
+            print(f"{to_do}   :   {subject}   :   {due_date_and_time}   :   {priority}   :   {progress}   :   {goal}   :   {goal_reached}")
 
 
     # 2. This function is for viewing the schedule.
@@ -51,88 +58,110 @@ try:
 
     # 3. This function makes sure tasks are up to date.
     def update_tasks(res):
+        print("Here are tasks to choose from: ")
+        check_tasks()
+        tasks = get_tasks()
         if res == "+":
             print("What would you like to add?")
             new_task = input("- Enter task: ")
             new_sub = input("- Enter subject: ")
 
             print("When is the due date? ")
-            y2 = input("- Enter year(yy)")
-            m2 = input("- Enter month(mm)")
-            d2 = input("- Enter day(dd)")
+            y2 = input("- Enter year (yyyy): ")
+            m2 = input("- Enter month (mm): ")
+            d2 = input("- Enter day (dd): ")
             print("- Enter in military time:")
-            h2 = input(" > Enter hour(HH)")
-            mins2 = input(" > Enter minutes(MM)")
+            h2 = input(" > Enter hour (HH): ")
+            mins2 = input(" > Enter minutes (MM):")
 
             new_due_date = f"{y2}-{m2}-{d2}, {h2}:{mins2}"
             new_priority = ""
             new_prog = ""
 
             print("- When do you want this to be finished? ")
-            y1 = input("- Enter year(yy)")
-            m1 = input("- Enter month(mm)")
-            d1 = input("- Enter day(dd)")
-            print("- Enter in military time:")
-            h1 = input(" > Enter hour(HH)")
-            mins1 = input(" > Enter minutes(MM)")
+            y1 = input("- Enter year (yyyy): ")
+            m1 = input("- Enter month (mm): ")
+            d1 = input("- Enter day (dd): ")
+            print("- Enter in military time: ")
+            h1 = input(" > Enter hour (HH): ")
+            mins1 = input(" > Enter minutes (MM): ")
 
             new_goal = f"{y1}-{m1}-{d1}, {h1}:{mins1}"
             new_submission_status = False
             reached = False
 
-            added = {"task": new_task, "subject": new_sub, "due_date": new_due_date, "priority": new_priority, "progress": new_prog, "goal": new_goal, "submission status": new_submission_status, "goal_reached": reached}
-            reqs.append(added)
+            added = {"task": new_task, "subject": new_sub, "due_date_and_time": new_due_date, "priority": new_priority, "progress": new_prog, "goal": new_goal, "submission status": new_submission_status, "goal_reached": reached}
+            tasks.append(added)
 
 
         elif res == "0":
             tsk = input("What task would you like to change? ")
-            upd = input("What do you want to change; task, subject, due date, goal, or progress? (t/s/d/g/p): ")
+            upd = input("What do you want to change; task, subject, due date, goal, submission status, or progress? (t/s/d/g/ss/p): ")
             if upd == "t":
                 new_task = input("What will you change it to?: ")
-                for task in reqs:
+                for task in tasks:
                     if task["task"] == tsk:
                         task["task"] = new_task
 
-            elif upd == "d":
-                y = input("- Enter year(yy)")
-                m = input("- Enter month(mm)")
-                d = input("- Enter day(dd)")
-                print("- Enter in military time:")
-                h = input(" > Enter hour(HH)")
-                mins = input(" > Enter minutes(MM)")
-
-                for task in reqs:
+            elif upd == "s":
+                new_sub = input("What would you change it to?: ")
+                for task in tasks:
                     if task["task"] == tsk:
-                        date = f"{y}-{m}-{d}, {h}:{mins}"
-                        task["due_date_and_time"] = date
+                        task["subject"] = new_sub
+
+            elif upd == "d" or upd == "g":
+                if upd == "d":
+                    print("What is the new due date?")
+                elif upd == "g":
+                    print("What is your new goal?")
+
+                y = input("- Enter year (yyyy): ")
+                m = input("- Enter month (mm): ")
+                d = input("- Enter day (dd): ")
+                print("- Enter in military time: ")
+                h = input(" > Enter hour (HH): ")
+                mins = input(" > Enter minutes (MM): ")
+
+                if upd == "d":
+                    for task in tasks:
+                        if task["task"] == tsk:
+                            date = f"{y}-{m}-{d}, {h}:{mins}"
+                            task["due_date_and_time"] = date
+                else:
+                    for task in tasks:
+                        if task["task"] == tsk:
+                            date = f"{y}-{m}-{d}, {h}:{mins}"
+                            task["due_date_and_time"] = date
 
             if upd == "p":
                 prog = int(input("How much have you finished out of a hundred percent? (percent without symbol/not decimal): "))
                 if prog > 0:
-                    for task in reqs:
+                    for task in tasks:
                         task["progress"] = "Not started"
                 elif prog < 100:
-                    for task in reqs:
+                    for task in tasks:
                         task["progress"] = "In progress"
                 elif prog == 100:
-                    for task in reqs:
+                    for task in tasks:
                         task["progress"] = "Finished"
                 else:
                     print("That's not a valid input.")
-                    validate()
 
         elif res == "-":
             delete = input("What task would you like to delete? (task): ")
-            for task in reqs:
+            for task in tasks:
                 if delete == task["task"]:
                     reqs.remove(task)
         for task in reqs:
-            if task["submission status"]:
-                reqs.remove(task)
+            if task["submission_status"]:
+                tasks.remove(task)
+        save_tasks(tasks)
 
 
     # 4. This updates classes wanted to change, based on the subject period.
     def update_classes(chose, res):
+        print("Here is the schedule as a basis: ")
+        show_sched(chose)
         schedule = get_sched(chose)
         if res == "+":
             print("What would you like to add?")
@@ -147,7 +176,7 @@ try:
 
             schedule.append(added)
         elif res == "0":
-            cls = input("What class will be updated (period)?")
+            cls = input("What class will be updated (period)? ")
             upd = input("What do you wanna change; period, time, or teacher? (p/t/teach): ")
             if upd in ["P", "p", "T", "t", "teach", "Teach", "TEACH"]:
                 upd = upd.lower()
@@ -174,9 +203,9 @@ try:
                             print("Invalid input")
 
                 elif upd == "teach":
+                    new_tea = input("Who is your new teacher? ")
                     for classes in schedule:
                         if classes["period"] == cls:
-                            new_tea = input("Who is your knew teacher? ")
                             classes["teacher"] = new_tea
 
         elif res == "-":
@@ -185,18 +214,17 @@ try:
                 if delete == classes["period"]:
                     schedule.remove(classes)
 
-            validate()
-
             save_sched(chose, schedule)
 
     #This makes sure that students are notified for subjects due in a week, day, and hour.
     def notify():
+        tasks = get_tasks()
         time_list = []
         goal_list = []
         day_goal = []
         tasks_lst = []
         tasks_lst2 = []
-        for task in reqs:
+        for task in tasks:
             due = task["due_date_and_time"]
             due_date = datetime.strptime(due, "%Y-%m-%d, %H:%M")
             goal = task["goal"]
@@ -265,8 +293,10 @@ try:
             print(None)
 
         else:
+            print("These tasks are overdue: ")
             for sub, task in overdue:
-                print(f"{task['ta sk']} - {task['subject']}")
+                print(f"{task['task']} - {task['subject']}")
+        save_tasks(tasks)
 
 
     #This is for the user interface, which decides what is needed to access based on the user's decision.
@@ -311,45 +341,48 @@ try:
         print(r"                                      [___________________________________________]")
         print("=" * 138)
 
-        print("Menu: \n 1. Check Tasks\n 2. Check Schedule\n 3. Update Class\n 4. Update Tasks\n 0. Exit")
         time.sleep(0.5)
         ans = int(input(" \nWhat do you want to do? (1/2/3/4/0): "))
         if ans == 1:
-            yis = True
-            while yis:
-                check_tasks()
-                yis = validate()
+            check_tasks()
 
-        elif ans == 2 or 3:
-            yis = True
-            while yis:
+        elif ans == 2 or ans == 4:
                 choice = input("What day do you want?\n - Monday\n - Tuesday\n - Wednesday\n - Thursday\n - Friday\n - Back to menu\nEnter (M/T/W/Th/F/Menu): ")
                 if choice in["m", "t", "w", "th", "f", "M", "T", "W", "Th", "TH", "F"]:
                     choice = choice.lower()
 
                     if ans == 2:
-                        show_sched(choice)
+                        yis = True
+                        while yis:
+                            show_sched(choice)
+                            print("\nNext: Keep checking schedules")
+                            yis = validate()
 
-                    elif ans == 3:
-                        response = input("Would you like to add, change, or delete from the schedule? (+, 0, -): ")
-                        update_classes(choice, response)
+                    elif ans == 4:
+                        yis = True
+                        while yis:
+                            response = input("Would you like to add, change, or delete from the schedule? (+, 0, -): ")
+                            update_classes(choice, response)
+                            print("\nNext: Keep updating schedules")
+                            yis = validate()
+
 
                     elif choice in ["Menu", "menu"]:
-                        menu(yis)
+                        pass
 
                 else:
                     print("Not a valid input.")
-                    yis = validate()
 
-        elif ans == 4:
+        elif ans == 3:
+            yis = True
             while yis:
-                response = input("Would you like to add, change, or delete from the schedule? (+, 0, -): ")
+                response = input("Would you like to add, change, or delete tasks? (+, 0, -): ")
                 update_tasks(response)
+                print("\nNext: Keep updating tasks")
                 yis = validate()
 
         elif ans == 0:
-            yes = validate()
-
+            pass
 
 
     # This opens the json file for tasks.
@@ -396,9 +429,11 @@ try:
     print("")
     print("Take a look around, this is our menu:")
     time.sleep(1)
-    cont = True
-    while cont:
-        menu(cont)
+    yes = True
+    while yes:
+        menu()
+        print("\nGoing back to menu...")
+        yes = validate()
 
 #Except, me :3
 except FileNotFoundError:
