@@ -133,7 +133,7 @@ try:
                             date = f"{y}-{m}-{d}, {h}:{mins}"
                             task["due_date_and_time"] = date
 
-            if upd == "p":
+            elif upd == "p":
                 prog = int(input("How much have you finished out of a hundred percent? (percent without symbol/not decimal): "))
                 if prog > 0:
                     for task in tasks:
@@ -147,11 +147,25 @@ try:
                 else:
                     print("That's not a valid input.")
 
+            elif upd == "ss":
+                finished = input("Did you finish your task? ")
+                if finished in ["Y", "y", "n", "N"]:
+                    if finished.lower() == "y":
+                        for task in tasks:
+                            if task["task"] == tsk:
+                                task["submission_status"] = True
+
+            else:
+                print("Invalid input")
+
         elif res == "-":
             delete = input("What task would you like to delete? (task): ")
             for task in tasks:
                 if delete == task["task"]:
                     reqs.remove(task)
+                else:
+                    print("Invalid output")
+
         for task in reqs:
             if task["submission_status"]:
                 tasks.remove(task)
@@ -213,6 +227,8 @@ try:
             for classes in schedule:
                 if delete == classes["period"]:
                     schedule.remove(classes)
+        else:
+            print("Invalid input.")
 
             save_sched(chose, schedule)
 
