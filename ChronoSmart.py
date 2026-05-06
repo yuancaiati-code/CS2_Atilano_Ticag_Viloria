@@ -14,9 +14,19 @@ try:
         with open(f'{day}.json','w') as f1:
             json.dump(data,f1,indent=3)
 
+    #This gets the tasks from the json file.
+    def get_tasks():
+        with open('tasks.json', 'r') as f2:
+            return json.load(f2)
+
+    #This function saves the updates on the file, getting the parameter "data". which is the variable name saved.
+    def save_tasks(data):
+        with open('tasks.json', 'w') as f2:
+            json.dump(data, f2, indent = 3)
+
     #This function is for validating yes and no inputs.
     def validate():
-        res = input("Would you like to continue? (Y/N)")
+        res = input("Would you like to continue? (Y/N): ")
         if res in ["Y", "y", "N", "n"]:
             if res.upper() == "N":
                 return False
@@ -24,14 +34,6 @@ try:
                 return True
         else:
             return validate()
-
-    def get_tasks():
-        with open('tasks.json', 'r') as f2:
-            return json.load(f2)
-
-    def save_tasks(data):
-        with open('tasks.json', 'w') as f2:
-            json.dump(data, f2, indent = 3)
 
     # 1. This outputs all the tasks with their subjects and due dates.
     def check_tasks():
@@ -95,7 +97,7 @@ try:
 
 
         elif res == "0":
-            tsk = input("What task would you like to change? ")
+            tsk = input("What task would you like to change? (task name): ")
             upd = input("What do you want to change; task, subject, due date, goal, submission status, or progress? (t/s/d/g/ss/p): ")
             if upd == "t":
                 new_task = input("What will you change it to?: ")
@@ -148,12 +150,16 @@ try:
                     print("That's not a valid input.")
 
             elif upd == "ss":
-                finished = input("Did you finish your task? ")
+                finished = input("Did you finish your task? (Y/N): ")
                 if finished in ["Y", "y", "n", "N"]:
                     if finished.lower() == "y":
                         for task in tasks:
                             if task["task"] == tsk:
                                 task["submission_status"] = True
+                    else:
+                        for task in tasks:
+                            if task["task"] == tsk:
+                                task["submission_status"] = False
 
             else:
                 print("Invalid input")
@@ -162,13 +168,16 @@ try:
             delete = input("What task would you like to delete? (task): ")
             for task in tasks:
                 if delete == task["task"]:
-                    reqs.remove(task)
+                    tasks.remove(task)
                 else:
                     print("Invalid output")
 
-        for task in reqs:
-            if task["submission_status"]:
+        for task in tasks:
+            if not task["submission_status"]:
+                pass
+            else:
                 tasks.remove(task)
+
         save_tasks(tasks)
 
 
@@ -337,8 +346,8 @@ try:
         print(r"                                        |  |    |2. Check schedule      |    |  |")
         print(r"                                        |  |    |3. Update tasks        |    |  |")
         print(r"                                        |  |    |4. Update schedule     |    |  |")
+        print(r"                                        |  |    |5. Exit                |    |  |")
         print(r"                                        |  |    |_______________________|    |  |")
-        print(r"                                        |  |            //  **  \\           |  |")
         print(r"                                        |  |          //    *  \  \\         |  |")
         print(r"                                        |  |        //      *    \  \\       |  |")
         print(r"                                        |  |      //        *     \   \\     |  |")
@@ -398,7 +407,7 @@ try:
                 yis = validate()
 
         elif ans == 0:
-            pass
+            print("Are you sure?")
 
 
     # This opens the json file for tasks.
