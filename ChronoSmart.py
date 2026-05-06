@@ -40,9 +40,36 @@ try:
         tasks = get_tasks()
         print("Task ------> Subject ------> Due Date & Time ------> Priority ------> Progress ------> Goal ------> Is goal reached? ")
         tasks_to_do = []
+        count = 0
+        finished = 0
+        reach = 0
         for task in tasks:
+            count =+ 1
             tasks_to_do.append((task["task"], task["subject"], task["due_date_and_time"], task["priority"],
                                 task["progress"], task["goal"], task["goal_reached"]))
+            if task["progress"] == "Done":
+                finished =+ 1
+            if task["goal_reached"] is True:
+                reach =+ 1
+
+        if count == 0:
+            print("Wow! You finished all your tasks. Good Job!")
+
+        if reach == count:
+            print("WOAH! You finished all your tasks according to your goals. Keep the discipline.")
+        elif 1 < reach < count:
+            print(f"You finished {reach} tasks according to your goals. That's great! Keep this up! You can do this!")
+        elif reach == 1:
+            print("You finished one task according to your goal! Continue this habit with other tasks.")
+
+        if finished == count:
+            print("Great job finishing all these tasks! All you need to do is submit them.")
+        elif 0 < finished < count:
+            print("Good job for finishing at least one task!")
+
+
+
+
         for to_do, subject, due_date_and_time, priority, progress, goal, goal_reached in tasks_to_do:
             print(f"{to_do}   :   {subject}   :   {due_date_and_time}   :   {priority}   :   {progress}   :   {goal}   :   {goal_reached}")
 
@@ -283,7 +310,7 @@ try:
                 task["priority"] = "Cooked"
 
         for goal_list, day_goal, task in tasks_lst2:
-            if task["progress"] == "Submitted":
+            if task["progress"] == "Done":
                 if goal_list >= day_goal:
                     task["goal_reached"] = True
                 else:
@@ -318,7 +345,7 @@ try:
             print(None)
 
         else:
-            print("These tasks are overdue: ")
+            print("Tasks overdue: ")
             for sub, task in overdue:
                 print(f"{task['task']} - {task['subject']}")
         save_tasks(tasks)
